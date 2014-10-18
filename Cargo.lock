@@ -1,0 +1,11 @@
+[root]
+name = "excfinder"
+version = "0.0.1"
+dependencies = [
+ "lines 0.0.1",
+]
+
+[[package]]
+name = "lines"
+version = "0.0.1"
+

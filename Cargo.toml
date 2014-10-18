@@ -1,0 +1,9 @@
+[package]
+name = "excfinder"
+version = "0.0.1"
+authors = []
+
+
+[dependencies.lines]
+# git = "https://github.com/xitep/lines-rs.git"
+path = "../lines-rs"
