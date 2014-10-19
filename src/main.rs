@@ -92,13 +92,11 @@ fn process_arg(cfg: &Config, arg: &str) -> IoResult<()> {
 
     let mut line_no = 0u;
     let mut collecting_block = false;
+    let mut output_produced = false;
     linemapper::map_lines(r, |line| {
         line_no += 1;
         if cfg.line_regex.is_match(String::from_utf8_lossy(line).as_slice()) {
             if collecting_block {
-                // ~ XXX only if we have already produced some output before
-                let _ = block.write_char('\n');
-
                 // ~ abort as soon as possible if the write didn't
                 // succeed e.g. broken pipe
                 if let Err(e) = stdout.write(block.get_ref()) {
@@ -106,9 +104,14 @@ fn process_arg(cfg: &Config, arg: &str) -> IoResult<()> {
                     std::os::set_exit_status(1);
                     return false;
                 }
+                output_produced = true;
                 collecting_block = false;
             }
             block.clear();
+
+            if output_produced {
+                let _ = block.write_char('\n');
+            }
         } else {
             collecting_block = true;
         }
