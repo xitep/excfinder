@@ -18,8 +18,9 @@ use buf::MemWriter;
 mod buf;
 
 struct Config {
+    print_line_numbers: bool,
+    print_filenames: bool,
     line_regex: Regex,
-    line_numbers: bool,
     args: Vec<String>,
 }
 
@@ -28,6 +29,7 @@ impl Config {
         let opts = [
             optflag("h", "help", "print this help screen"),
             optflag("n", "line-numbers", "print line numbers"),
+            optflag("f", "filename", "print file name"),
             optopt("e", "entry", "identify regular lines", "regex"),
             ];
         let matches = match getopts(args.tail(), opts) {
@@ -51,8 +53,9 @@ impl Config {
             }
         };
         Ok(Config {
+            print_line_numbers: matches.opt_present("n"),
+            print_filenames: matches.opt_present("f"),
             line_regex: re,
-            line_numbers: matches.opt_present("n"),
             args: matches.free,
         })
     }
@@ -112,7 +115,12 @@ fn process_arg(cfg: &Config, arg: &str) -> IoResult<()> {
 
         // XXX prevent the buffer from becoming too large by flushing
         // it out as of a certain size
-        if cfg.line_numbers {
+
+        if cfg.print_filenames {
+            let _ = block.write_str(arg);
+            let _ = block.write_str("  ");
+        }
+        if cfg.print_line_numbers {
             let _ = write!(block, "{:7u}  ", line_no);
         }
         let _ = block.write(line);
