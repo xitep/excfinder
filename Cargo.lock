@@ -2,10 +2,22 @@
 name = "excfinder"
 version = "0.0.1"
 dependencies = [
+ "getopts 0.1.3 (registry+https://github.com/rust-lang/crates.io-index)",
  "lines 0.0.1",
+ "regex 0.1.9 (registry+https://github.com/rust-lang/crates.io-index)",
 ]
+
+[[package]]
+name = "getopts"
+version = "0.1.3"
+source = "registry+https://github.com/rust-lang/crates.io-index"
 
 [[package]]
 name = "lines"
 version = "0.0.1"
+
+[[package]]
+name = "regex"
+version = "0.1.9"
+source = "registry+https://github.com/rust-lang/crates.io-index"
 

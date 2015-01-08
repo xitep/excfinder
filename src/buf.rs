@@ -4,7 +4,7 @@
 
 use std::io::IoResult;
 
-#[deriving(Clone)]
+#[derive(Clone)]
 pub struct MemWriter {
     buf: Vec<u8>,
 }

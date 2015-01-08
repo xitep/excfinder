@@ -1,5 +1,3 @@
-#![feature(if_let)]
-
 extern crate regex;
 extern crate getopts;
 extern crate lines;
@@ -26,7 +24,7 @@ struct Config {
 
 impl Config {
     fn from_cmdline(args: Vec<String>) -> Result<Config, String> {
-        let opts = [
+        let opts = &[
             optflag("h", "help", "print this help screen"),
             optflag("n", "line-numbers", "print line numbers"),
             optflag("f", "filename", "print file name"),
@@ -74,7 +72,7 @@ fn main() {
     };
     for arg in cfg.args.iter() {
         if let Err(e) = process_arg(&cfg, arg.as_slice()) {
-            let _ = write!(stderr(), "{}", e);
+            let _ = write!(&mut stderr(), "{}", e);
             std::os::set_exit_status(1);
             return;
         }
@@ -88,7 +86,7 @@ fn process_arg(cfg: &Config, arg: &str) -> IoResult<()> {
     let r = BufferedReader::new(f);
 
     let mut block = MemWriter::with_capacity(1024);
-    let mut stdout = stdout().unwrap();
+    let mut stdout = stdout();
 
     let mut line_no = 0u;
     let mut collecting_block = false;
@@ -100,7 +98,7 @@ fn process_arg(cfg: &Config, arg: &str) -> IoResult<()> {
                 // ~ abort as soon as possible if the write didn't
                 // succeed e.g. broken pipe
                 if let Err(e) = stdout.write(block.get_ref()) {
-                    let _ = write!(stderr(), "{}", e);
+                    let _ = write!(&mut stderr(), "{}", e);
                     std::os::set_exit_status(1);
                     return false;
                 }
@@ -124,7 +122,7 @@ fn process_arg(cfg: &Config, arg: &str) -> IoResult<()> {
             let _ = block.write_str("  ");
         }
         if cfg.print_line_numbers {
-            let _ = write!(block, "{:7u}  ", line_no);
+            let _ = write!(&mut block, "{:7}  ", line_no);
         }
         let _ = block.write(line);
         true
