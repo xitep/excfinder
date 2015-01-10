@@ -18,7 +18,7 @@ impl MemWriter {
     /// Create a new `MemWriter`, allocating at least `n` bytes for
     /// the internal buffer.
     #[inline]
-    pub fn with_capacity(n: uint) -> MemWriter {
+    pub fn with_capacity(n: usize) -> MemWriter {
         MemWriter { buf: Vec::with_capacity(n) }
     }
 
@@ -26,7 +26,7 @@ impl MemWriter {
     /// Acquires an immutable reference to the underlying buffer of this
     /// `MemWriter`.
     #[inline]
-    pub fn get_ref<'a>(&'a self) -> &'a [u8] { self.buf.as_slice() }
+    pub fn get_ref<'a>(&'a self) -> &'a [u8] { &self.buf[] }
 
     /// Unwraps this `MemWriter`, returning the underlying buffer
     #[inline]

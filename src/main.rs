@@ -88,12 +88,12 @@ fn process_arg(cfg: &Config, arg: &str) -> IoResult<()> {
     let mut block = MemWriter::with_capacity(1024);
     let mut stdout = stdout();
 
-    let mut line_no = 0u;
+    let mut line_no = 0us;
     let mut collecting_block = false;
     let mut output_produced = false;
     linemapper::map_lines(r, |line| {
         line_no += 1;
-        if cfg.line_regex.is_match(String::from_utf8_lossy(line).as_slice()) {
+        if cfg.line_regex.is_match(&String::from_utf8_lossy(line)[]) {
             if collecting_block {
                 // ~ abort as soon as possible if the write didn't
                 // succeed e.g. broken pipe
