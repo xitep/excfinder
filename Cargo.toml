@@ -8,4 +8,4 @@ getopts = "*"
 
 [dependencies.lines]
 # git = "https://github.com/xitep/lines-rs.git"
-path = "../lines-rs"
+path = "externals/lines-rs"
