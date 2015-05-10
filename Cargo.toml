@@ -2,6 +2,13 @@
 name = "excfinder"
 version = "0.0.1"
 
+[profile.release]
+opt-level = 3
+debug = false
+rpath = false
+lto = true
+debug-assertions = false
+
 [dependencies]
 regex = "*"
 getopts = "*"
