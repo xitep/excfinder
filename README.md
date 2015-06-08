@@ -1,5 +1,5 @@
-excfinder - fast log parser to extra exception stacktraces
-==========================================================
+excfinder - fast log parser to extract exception stacktraces
+============================================================
 
 Log files usually contain a single line per log entry.  Typically,
 every such line begins with a stable pattern, for example the entry's
