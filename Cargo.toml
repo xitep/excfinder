@@ -2,9 +2,10 @@
 name = "excfinder"
 version = "0.0.1"
 authors = ["Petr Novotnik <pnovotnik@googlemail.com>"]
-description = "A fast log file filter to list exception stacktraces"
+description = "A fast log file filter for exception stacktraces"
 license = "MIT"
 keywords = ["text"]
+repository = "https://github.com/xitep/excfinder.git"
 
 [profile.release]
 opt-level = 3
