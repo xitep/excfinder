@@ -38,10 +38,10 @@ options.
 Limitations
 -----------
 
-* `excfinder` supports only UTF-8 input
+Right now, `excfinder` supports only valid UTF-8 input.
 
 
 License
 -------
 
-`excfinder` is distributed by the MIT license.
+`excfinder` is distributed under the MIT license.
