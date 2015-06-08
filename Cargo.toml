@@ -1,6 +1,10 @@
 [package]
 name = "excfinder"
 version = "0.0.1"
+authors = ["Petr Novotnik <pnovotnik@googlemail.com>"]
+description = "A fast log file filter to list exception stacktraces"
+license = "MIT"
+keywords = ["text"]
 
 [profile.release]
 opt-level = 3
@@ -14,5 +18,5 @@ regex = "*"
 getopts = "*"
 
 [dependencies.lines]
-# git = "https://github.com/xitep/lines-rs.git"
-path = "externals/lines-rs"
+git = "https://github.com/xitep/lines-rs.git"
+branch = "rustc-nightly"
