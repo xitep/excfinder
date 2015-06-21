@@ -1,5 +1,3 @@
-#![feature(exit_status)]
-
 extern crate regex;
 extern crate getopts;
 
@@ -10,6 +8,7 @@ use std::env;
 use std::fs::File;
 use std::io::{Write, stderr, stdout};
 use std::io::Result as IoResult;
+use std::process;
 
 use getopts::Options;
 
@@ -21,15 +20,13 @@ fn main() {
         Ok(cfg) => cfg,
         Err(e) => {
             let _ = stderr().write_all(e.as_ref());
-            env::set_exit_status(1);
-            return;
+            process::exit(1);
         }
     };
     for file in files {
         if let Err(e) = process_arg(&cfg, &file) {
             let _ = write!(&mut stderr(), "{}", e);
-            env::set_exit_status(1);
-            return;
+            process::exit(1);
         }
     }
 }
