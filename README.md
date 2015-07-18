@@ -1,6 +1,8 @@
 excfinder - fast log parser to extract exception stacktraces
 ============================================================
 
+[![Build Status](https://travis-ci.org/xitep/excfinder.svg?branch=master)](https://travis-ci.org/xitep/excfinder)
+
 Log files usually contain a single line per log entry.  Every such
 line usually begins with a stable pattern, for example the entry's
 timestamp.  On the other hand, exception stacktraces typically cover
